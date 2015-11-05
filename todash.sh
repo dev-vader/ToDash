@@ -6,14 +6,8 @@ THIRD_PARAM="$3"
 
 SUB_DIR="/Users/vincentweber/Desktop/todo/"
 
-GREEN='\033[1;32m'
-NC='\e[0m'
-
-
 ##DIRPC="/home/vince/Development/ToDash/"
 ##DIRMAC="/Users/vincentweber/Desktop/todo/"
-##Empty var to hold number of tasks(lines) in a file
-
 
 ##var used to output number of tasks
 LINE_COUNT=""
@@ -47,8 +41,8 @@ function createTaskOrCOMMAND {
 function emptyString {
 	if [[ -z "$COMMAND" ]];
 	then
-		echo "Hello, thanks for using TODASH the simple BASH COMMAND manager."
-		echo "ex: todash COMMANDname 'Schedule vet appointment for kitty'"
+		echo "Hello, thanks for using TODASH the simple BASH TODO list manager."
+		echo "ex: todash TODOLIST 'Schedule vet appointment for kitty'"
    		echo
 	fi
 }
@@ -95,38 +89,26 @@ function deleteList {
 	fi
 }
 
+function splash {
+	echo
+	echo "ToDash commands:"
+	echo "todash lists - prints all working lists"
+	echo "todash delete list LISTNAME - deletes list LISTNAME"
+	echo "todash read LISTNAME - prints all list items to console"
+	echo "todash remove LISTNAME 6 - removes item#6 from LISTNAME"
+	echo "todash LISTNAME TASK - writes TASK to LISTNAME creates LISTNAME if it doesnt exist"
+	echo
+}
 ##Switch case to handle all argurments
 case $COMMAND in 
-	"")
-		emptyString
-		;;
-	lists)
-		taskLists
-		;;
-	list)
-		taskLists
-		;;
-	read)
-		readList
-		;;
-	remove)
-		removeTask
-		;;
-	delete)
-		deleteList
-		;;
-	help)
-		echo
-		echo "ToDash commands:"
-		echo "todash lists - prints all working lists"
-		echo "todash delete list LISTNAME - deletes list LISTNAME"
-		echo "todash read LISTNAME - prints all list items to console"
-		echo "todash remove LISTNAME 6 - removes item#6 from LISTNAME"
-		echo "todash LISTNAME TASK - writes TASK to LISTNAME creates LISTNAME if it doesnt exist"
-		echo
-	;;
-	*)
-		createTaskOrCOMMAND
+	"") 	emptyString ;;
+	lists) 	taskLists ;;
+	list) 	taskLists ;;
+	read)	readList ;;
+	remove)	removeTask ;;
+	delete)	deleteList	;;
+	help) splash ;;
+	*) createTaskOrCOMMAND
 esac
 
 
