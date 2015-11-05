@@ -10,6 +10,7 @@ SUB_DIR="/home/vince/Development/ToDash/"
 to match the directory you would like to keep your lists stored in.
 
 **COMMANDS**
+
 `todash lists` prints all lists in directory.
 
 `todash delete list LISTNAME` deletes TODO list LISTNAME in directory.
