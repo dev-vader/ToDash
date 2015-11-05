@@ -1,29 +1,22 @@
 #!/bin/bash
 
-## Simple TODO COMMAND 
-## Prints to file taken as second ARG ( $ TODO School Yada yada yada )
-## Creates file COMMAND in set directory if it does not exist
-## Appends test with timestamp to file
-
 COMMAND="$1"
 ITEM="$2"
 THIRD_PARAM="$3"
 
-SUB_DIR="/home/vince/Development/ToDash/"
+SUB_DIR="/Users/vincentweber/Desktop/todo/"
 
-##
-DIR="/home/vince/Development/ToDash/$COMMAND.txt"-
+GREEN='\033[1;32m'
+NC='\e[0m'
 
+
+##DIRPC="/home/vince/Development/ToDash/"
+##DIRMAC="/Users/vincentweber/Desktop/todo/"
 ##Empty var to hold number of tasks(lines) in a file
+
+
+##var used to output number of tasks
 LINE_COUNT=""
-
-##directory in which will hold COMMANDs
-
-
-##Create makefile to create directory set as desktop title TODO
-##Check for root Dir every call I guess?
-
-
 function taskCount {
 	LINE_COUNT=$(sed -n '$=' $SUB_DIR$COMMAND.txt ) 
 }
@@ -34,20 +27,23 @@ function createTaskOrCOMMAND {
 	then
 		echo "$ITEM" >> $SUB_DIR$COMMAND.txt
 		taskCount $SUB_DIR$COMMAND.txt
-		echo "$ITEM has been added to $COMMAND"
+		echo "$ITEM has been added to todo list $COMMAND"
 		echo "$LINE_COUNT task(s) in list $COMMAND"
 		echo
 
 	else
-		touch /home/vince/Development/ToDash/$COMMAND.txt
+		
+		##	touch /home/vince/Development/ToDash/$COMMAND.txt
+		touch $SUB_DIR$COMMAND.txt
 		echo "$ITEM" >> $SUB_DIR$COMMAND.txt
-		echo "$ITEM has been added to $COMMAND"
+		echo "$ITEM has been added to todo list $COMMAND"
 		taskCount $SUB_DIR$COMMAND.txt
 		echo "$LINE_COUNT task(s) in list $COMMAND"
 		echo
 	fi
 }
 
+##Check if arguments after todash call is empty..print splash message
 function emptyString {
 	if [[ -z "$COMMAND" ]];
 	then
@@ -57,33 +53,67 @@ function emptyString {
 	fi
 }
 
+##Reads file until end of fell, appends task number (line) before task.
 function readList {
-	counter=0
+	counter=1
 	while IFS= read -r lines
 	do 
-		echo "($counter) $lines"	
+		echo "($counter.)$lines"	
 		let "counter+=1"
 	done < "$SUB_DIR$ITEM.txt"
-
+	echo
 }
 
+##Removes task using sed, prints out tasks then removes it 
+##Add if for confirmation
 function removeTask {
 	sed -n "$THIRD_PARAM p" $SUB_DIR$ITEM.txt
-	sed -i "$THIRD_PARAM d" $SUB_DIR$ITEM.txt
+	## OSX sed requires ' ' after -i
+	out=`sed -i ':a;N;$!ba;s/\n/ /g' "$THIRD_PARAM d" $SUB_DIR$ITEM.txt`
+	echo "$out has been removed."
 }
 
+##Change output new line per list and quantity of tasks
+function taskLists {
+	##for file in $SUB_DIR*; 
+	##do
+	##	echo ${file}
+	##done
+	echo 
+	echo "Your TODO lists:"
+	echo $(basename $SUB_DIR*)
+	echo
+}
+
+function deleteList {
+	if [ -f $SUB_DIR$ITEM.txt ];
+	then
+		rm $SUB_DIR$ITEM.txt
+		echo "Todo list $ITEM has been removed."
+	else 
+		echo "Todo list $ITEM does not exist."
+	fi
+}
+
+##Switch case to handle all argurments
 case $COMMAND in 
 	"")
 		emptyString
 		;;
 	lists)
-		echo "Lists"
+		taskLists
+		;;
+	list)
+		taskLists
 		;;
 	read)
 		readList
 		;;
 	remove)
 		removeTask
+		;;
+	delete)
+		deleteList
 		;;
 	help)
 		echo
@@ -99,21 +129,4 @@ case $COMMAND in
 		createTaskOrCOMMAND
 esac
 
-
-
-
-
-## Check if FILE exists in TODO dir and != "other keywords"
-	## if it exists append task 
-	##Echo "nth task added "
-		## if it doesnt exist create COMMAND
-		## append string to COMMAND
-
-## View COMMAND
-	##print out COMMAND giving numbers before items
-	##if COMMAND doesnt exist print Error: Please check COMMAND name.
-
-## todo remove COMMAND itemnumber
-	## Print item has been completed
-	## Remove item
 
