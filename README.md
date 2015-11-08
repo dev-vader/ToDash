@@ -19,4 +19,4 @@ to match the directory you would like to keep your lists stored in.
 
 `todash remove LISTNAME X` removes item number x from LISTNAME.
 
-`todash lists LISTNAME TAKS` - adds task to TODO list , creates TODO list if it doesnt exist.  
+`todash lists LISTNAME TASK` - adds task to TODO list , creates TODO list if it doesnt exist.  
