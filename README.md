@@ -3,10 +3,10 @@
 
 ## Setup
 
-- 'git clone https://github.com/vinceiv/ToDash.git'
+- `git clone https://github.com/vinceiv/ToDash.git'
 - Simply edit `SUB_DIR="/home/vince/Development/ToDash/"`to match the directory you would like to keep your lists stored in.
 - cd into directory
-- run ./todash.sh
+- run `./todash.sh'
 - Add PATH to environment variable to run from anywhere in terminal
 
 ## COMMANDS
