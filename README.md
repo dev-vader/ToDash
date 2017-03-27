@@ -1,7 +1,7 @@
-# ToDash
-ToDash is a simple BASH CLI TODO list manager.
 
-Simply edit 
+> ToDash is a simple BASH CLI TODO list manager.
+
+Simply edit
 
 `
 SUB_DIR="/home/vince/Development/ToDash/"

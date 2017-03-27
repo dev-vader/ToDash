@@ -12,7 +12,7 @@ SUB_DIR="/Users/vincentweber/Desktop/todo/"
 ##var used to output number of tasks
 LINE_COUNT=""
 function taskCount {
-	LINE_COUNT=$(sed -n '$=' $SUB_DIR$COMMAND.txt ) 
+	LINE_COUNT=$(sed -n '$=' $SUB_DIR$COMMAND.txt )
 }
 
 function createTaskOrCOMMAND {
@@ -24,9 +24,7 @@ function createTaskOrCOMMAND {
 		echo "$ITEM has been added to todo list $COMMAND"
 		echo "$LINE_COUNT task(s) in list $COMMAND"
 		echo
-
 	else
-		
 		##	touch /home/vince/Development/ToDash/$COMMAND.txt
 		touch $SUB_DIR$COMMAND.txt
 		echo "$ITEM" >> $SUB_DIR$COMMAND.txt
@@ -51,14 +49,14 @@ function emptyString {
 function readList {
 	counter=1
 	while IFS= read -r lines
-	do 
-		echo "($counter.)$lines"	
+	do
+		echo "($counter.)$lines"
 		let "counter+=1"
 	done < "$SUB_DIR$ITEM.txt"
 	echo
 }
 
-##Removes task using sed, prints out tasks then removes it 
+##Removes task using sed, prints out tasks then removes it
 ##Add if for confirmation
 function removeTask {
 	sed -n "$THIRD_PARAM p" $SUB_DIR$ITEM.txt
@@ -69,11 +67,11 @@ function removeTask {
 
 ##Change output new line per list and quantity of tasks
 function taskLists {
-	##for file in $SUB_DIR*; 
+	##for file in $SUB_DIR*;
 	##do
 	##	echo ${file}
 	##done
-	echo 
+	echo
 	echo "Your TODO lists:"
 	echo $(basename $SUB_DIR*)
 	echo
@@ -84,7 +82,7 @@ function deleteList {
 	then
 		rm $SUB_DIR$ITEM.txt
 		echo "Todo list $ITEM has been removed."
-	else 
+	else
 		echo "Todo list $ITEM does not exist."
 	fi
 }
@@ -100,7 +98,7 @@ function splash {
 	echo
 }
 ##Switch case to handle all argurments
-case $COMMAND in 
+case $COMMAND in
 	"") 	emptyString ;;
 	lists) 	taskLists ;;
 	list) 	taskLists ;;
@@ -110,5 +108,3 @@ case $COMMAND in
 	help) splash ;;
 	*) createTaskOrCOMMAND
 esac
-
-
