@@ -1,4 +1,4 @@
-[alt text](https://github.com/vinceiv/ToDash/blob/master/share/todash.gif "_-")
+![alt text](https://github.com/vinceiv/ToDash/blob/master/share/todash.gif "_")
 > ToDash is a simple BASH CLI TODO list manager.
 
 Simply edit
